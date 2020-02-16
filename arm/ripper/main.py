@@ -204,7 +204,7 @@ def main(logfile, job):
                             # move others into extras folder
                             if(f == largest_file_name):
                                 # largest movie
-                                utils.move_files(hbinpath, f, job.hasnicetitle, job, True)
+                                utils.move_files(hbinpath, f, job, True)
                             else:
                                 # other extras
                                 if not str(job.config.EXTRAS_SUB).lower() == "none":
@@ -240,7 +240,8 @@ def main(logfile, job):
                 utils.notify(job, "ARM notification", str(job.title) + " processing complete.")
                 logging.info("ARM processing complete")
                 # exit
-                sys.exit()
+                # sys.exit()
+                return
 
         job.status = "transcoding"
         db.session.commit()
