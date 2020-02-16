@@ -208,7 +208,7 @@ def main(logfile, job):
                             else:
                                 # other extras
                                 if not str(job.config.EXTRAS_SUB).lower() == "none":
-                                    utils.move_files(hbinpath, f, job.hasnicetitle, job, False)
+                                    utils.move_files(hbinpath, f, job, False)
                                 else:
                                     logging.info("Not moving extra: " + f)
                     # Change final path (used to set permissions)
