@@ -107,7 +107,7 @@ def main(logfile, job):
                      + str(job.video_type) + ". Main Feature is " + str(job.config.MAINFEATURE)
                      + ".  Edit entry here: http://" + job.config.WEBSERVER_IP + ":" + str(job.config.WEBSERVER_PORT))
     elif job.disctype == "music":
-        utils.notify(job, "ARM notification", "Found music CD: " + job.label + ". Ripping all tracks")
+        utils.notify(job, "ARM notification", "Found music CD. Ripping all tracks")
     elif job.disctype == "data":
         utils.notify(job, "ARM notification", "Found data disc.  Copying data.")
     else:
