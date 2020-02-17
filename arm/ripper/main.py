@@ -321,7 +321,7 @@ def main(logfile, job):
 
     elif job.disctype == "music":
         if utils.rip_music(job, logfile):
-            utils.notify(job, "ARM notification", "Music CD: " + job.label + " processing complete.")
+            utils.notify(job, "ARM notification", "Music CD processing complete.")
             utils.scan_emby(job)
         else:
             logging.info("Music rip failed.  See previous errors.  Exiting.")
