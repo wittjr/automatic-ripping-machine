@@ -199,7 +199,8 @@ def get_video_details(job):
     title = re.sub('[_ ]', "+", title)
 
     logging.debug("Calling webservice with title: " + title + " and year: " + year)
-    response = callwebservice(job, omdb_api_key, title, year)
+    # Trying without the year first, 4K videos are sometimes years later (this needs to be improved)
+    response = callwebservice(job, omdb_api_key, title, "")
     logging.debug("response: " + response)
 
     # handle failures
@@ -209,14 +210,14 @@ def get_video_details(job):
         # first try subtracting one year.  This accounts for when
         # the dvd release date is the year following the movie release date
         logging.debug("Subtracting 1 year...")
-        response = callwebservice(job, omdb_api_key, title, str(int(year) - 1))
+        response = callwebservice(job, omdb_api_key, title, "")
         logging.debug("response: " + response)
 
         # try submitting without the year
         if response == "fail":
             # year needs to be changed
             logging.debug("Removing year...")
-            response = callwebservice(job, omdb_api_key, title, "")
+            response = callwebservice(job, omdb_api_key, title, str(int(year) - 1))
             logging.debug("response: " + response)
 
         # if response != "fail":
@@ -232,14 +233,14 @@ def get_video_details(job):
                 title = title.rsplit('-', 1)[0]
                 # dvd_title_slice = cleanupstring(dvd_title_slice)
                 logging.debug("Trying title: " + title)
-                response = callwebservice(job, omdb_api_key, title, year)
+                response = callwebservice(job, omdb_api_key, title, "")
                 logging.debug("response: " + response)
 
             # if still fail, then try slicing off the last word in a loop
             while response == "fail" and title.count('+') > 0:
                 title = title.rsplit('+', 1)[0]
                 logging.debug("Trying title: " + title)
-                response = callwebservice(job, omdb_api_key, title, year)
+                response = callwebservice(job, omdb_api_key, title, "")
                 logging.debug("response: " + response)
 
 
